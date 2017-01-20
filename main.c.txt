@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+void * thread_A()
+{
+        while(1){
+                printf("Running thread A!\n");
+                printf("Thread A sleeping 5 seconds!\n\n");
+                sleep(5);
+        }
+}
+
+void * thread_B()
+{
+        while(1){
+                printf("    -> Running thread B!\n");
+                printf("    -> Thread B sleeping 2 seconds!\n\n");
+                sleep(2);
+        }
+}
+
+int main()
+{
+        int status;
+        pthread_t id_A,id_B;
+
+        pthread_create(&id_A,NULL,thread_A,NULL);
+        pthread_create(&id_B,NULL,thread_B,NULL);
+        pthread_join(id_A,NULL);
+        pthread_join(id_B,NULL);
+        return 0;
+}
